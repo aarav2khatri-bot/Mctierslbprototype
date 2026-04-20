@@ -1,186 +1,231 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Otaku Tiers</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #0b0f1a;
-      color: white;
-      max-width: 500px;
-      margin: auto;
-    }
-
-    .header {
-      text-align: center;
-      padding: 10px;
-    }
-
-    .header img {
-      width: 220px;
-    }
-
-    .search {
-      width: 90%;
-      margin: auto;
-    }
-
-    .search input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      background: #1a2133;
-      color: white;
-    }
-
-    .card {
-      width: 90%;
-      margin: 15px auto;
-      background: #141a2b;
-      border-radius: 12px;
-      padding: 15px;
-    }
-
-    .player {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .player img {
-      width: 50px;
-      border-radius: 8px;
-    }
-
-    .name {
-      font-weight: bold;
-    }
-
-    .meta {
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    .icons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 15px;
-    }
-
-    .icon {
-      text-align: center;
-    }
-
-    .icon img {
-      width: 34px;
-      height: 34px;
-      image-rendering: pixelated;
-      background: #0b0f1a;
-      border-radius: 50%;
-      padding: 6px;
-      border: 2px solid gold;
-    }
-
-    .tier {
-      margin-top: 4px;
-      font-size: 11px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: gold;
-      color: black;
-      font-weight: bold;
-    }
-
-    .lt {
-      background: #3b82ff;
-      color: white;
-    }
-
-  </style>
+<title>Otaku Tiers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;font-family:Arial;background:#0b0f1a;color:white;max-width:420px;margin:auto}
+.header{text-align:center;padding:10px}
+input,button{width:100%;padding:8px;margin-top:5px;border-radius:8px;border:none}
+input{background:#1a2133;color:white}
+button{background:#2f3b5c;color:white}
+.card{background:#141a2b;margin:10px;padding:10px;border-radius:10px}
+.player{display:flex;gap:10px;align-items:center}
+.player img{width:40px;border-radius:6px}
+.icons{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.icon img{width:26px;padding:6px;border-radius:50%;border:2px solid gold;background:#0b0f1a}
+.tier{font-size:10px;background:gold;color:black;border-radius:4px;padding:2px;margin-top:2px}
+.lt{background:#3b82ff;color:white}
+.top1{border:2px solid gold}.top2{border:2px solid silver}.top3{border:2px solid #cd7f32}
+.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:#000c;display:none;justify-content:center;align-items:center}
+.popupBox{background:#141a2b;padding:15px;border-radius:10px;width:85%}
+.admin{display:none;margin:10px}
+.rowBtns{display:flex;gap:6px;margin-top:6px}
+.small{font-size:12px;color:#aaa}
+</style>
 </head>
 
 <body>
 
-<!-- OTAKU BANNER -->
 <div class="header">
-  <img src="otaku.png">
+  <h2>🏆 OTAKU TIERS</h2>
 </div>
 
 <!-- SEARCH -->
-<div class="search">
-  <input placeholder="Search player...">
+<div style="width:90%;margin:auto">
+  <input id="search" placeholder="Search player...">
 </div>
 
-<!-- PROFILE CARD -->
-<div class="card">
-
-  <div class="player">
-    <img src="https://mc-heads.net/avatar/Steve">
-    <div>
-      <div class="name">Player Name</div>
-      <div class="meta">NA • Combat Ace</div>
-    </div>
-  </div>
-
-  <!-- ALL GAMEMODE ICONS -->
-  <div class="icons">
-
-    <!-- Crystal -->
-    <div class="icon">
-      <img src="icons/crystal.png">
-      <div class="tier">HT1</div>
-    </div>
-
-    <!-- Sword -->
-    <div class="icon">
-      <img src="icons/sword.png">
-      <div class="tier">HT1</div>
-    </div>
-
-    <!-- Axe -->
-    <div class="icon">
-      <img src="icons/axe.png">
-      <div class="tier lt">LT1</div>
-    </div>
-
-    <!-- SMP -->
-    <div class="icon">
-      <img src="icons/helmet.png">
-      <div class="tier lt">LT1</div>
-    </div>
-
-    <!-- Mace -->
-    <div class="icon">
-      <img src="icons/mace.png">
-      <div class="tier">HT1</div>
-    </div>
-
-    <!-- NethPot -->
-    <div class="icon">
-      <img src="icons/potion.png">
-      <div class="tier">HT1</div>
-    </div>
-
-    <!-- DiaPot -->
-    <div class="icon">
-      <img src="icons/potion.png">
-      <div class="tier lt">LT2</div>
-    </div>
-
-    <!-- UHC -->
-    <div class="icon">
-      <img src="icons/sword.png">
-      <div class="tier">HT2</div>
-    </div>
-
-  </div>
-
+<!-- ADMIN LOGIN -->
+<div class="card" id="loginBox">
+  <input id="pass" placeholder="Admin password">
+  <button onclick="login()">Login as Admin</button>
+  <div class="small">Tip: change password in code (ADMIN_PASS)</div>
 </div>
+
+<!-- ADMIN PANEL -->
+<div class="card admin" id="adminBox">
+  <b>Add / Edit Player</b>
+  <input id="name" placeholder="Player name">
+  <input id="region" placeholder="Region (NA/EU/ASIA)">
+  <input id="tiers" placeholder="Tiers (e.g. HT1,HT1,LT1,HT1)">
+  <button onclick="addOrUpdate()">Add / Update</button>
+</div>
+
+<div id="list"></div>
+
+<!-- PROFILE POPUP -->
+<div class="popup" id="popup">
+  <div class="popupBox" id="popupContent"></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* 🔐 CHANGE THIS PASSWORD */
+const ADMIN_PASS = "otaku123";
+
+/* 🔥 PASTE YOUR FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "PASTE",
+  authDomain: "PASTE",
+  projectId: "PASTE"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let players = [];
+let isAdmin = false;
+
+/* ===== SCORE & RANK ===== */
+function calcScore(t){
+  let pts=0;
+  t.forEach(x=>{
+    if(x=="HT1") pts+=40;
+    else if(x=="HT2") pts+=30;
+    else if(x=="HT3") pts+=20;
+    else if(x=="LT1") pts+=15;
+    else if(x=="LT2") pts+=10;
+  });
+  return pts;
+}
+
+function getRank(s){
+  if(s>=200) return "Grandmaster";
+  if(s>=150) return "Master";
+  if(s>=100) return "Ace";
+  if(s>=60) return "Specialist";
+  if(s>=30) return "Beginner";
+  return "Newbie";
+}
+
+/* ===== AUTH ===== */
+window.login = function(){
+  let p = document.getElementById("pass").value;
+  if(p === ADMIN_PASS){
+    isAdmin = true;
+    document.getElementById("adminBox").style.display="block";
+    alert("Admin unlocked");
+  } else alert("Wrong password");
+}
+
+/* ===== ADD / UPDATE ===== */
+window.addOrUpdate = async function(){
+  let name = document.getElementById("name").value.trim();
+  let region = document.getElementById("region").value.trim() || "NA";
+  let tiersStr = document.getElementById("tiers").value.trim() || "HT1,HT1,LT1,HT1";
+  if(!name) return;
+
+  let tiers = tiersStr.split(",").map(x=>x.trim().toUpperCase());
+
+  // try update if exists
+  let existing = players.find(p=>p.name.toLowerCase()===name.toLowerCase());
+  if(existing){
+    await updateDoc(doc(db,"players", existing.id), { name, region, tiers });
+  } else {
+    await addDoc(collection(db,"players"), { name, region, tiers });
+  }
+  loadPlayers();
+}
+
+/* ===== DELETE ===== */
+window.delPlayer = async function(id){
+  if(!isAdmin) return;
+  if(confirm("Delete player?")){
+    await deleteDoc(doc(db,"players", id));
+    loadPlayers();
+  }
+}
+
+/* ===== LOAD ===== */
+async function loadPlayers(){
+  let snap = await getDocs(collection(db,"players"));
+  players = [];
+  snap.forEach(d=>{
+    players.push({ id:d.id, ...d.data() });
+  });
+  render();
+}
+
+/* ===== RENDER ===== */
+function render(){
+  let sorted = players.map(p=>{
+    let score = calcScore(p.tiers||[]);
+    return {...p, score};
+  }).sort((a,b)=>b.score-a.score);
+
+  let html="";
+  sorted.forEach((p,i)=>{
+    let top = i==0?"top1":i==1?"top2":i==2?"top3":"";
+    html += `
+    <div class="card ${top}">
+      <div class="player" onclick="openProfile('${p.id}')">
+        <img src="https://mc-heads.net/avatar/${p.name}">
+        <div>
+          <b>#${i+1} ${p.name}</b><br>
+          <span class="small">${p.region} • ${getRank(p.score)} • ${p.score} pts</span>
+        </div>
+      </div>
+
+      <div class="icons">
+        ${(p.tiers||[]).map(t=>`
+          <div>
+            <div class="icon">
+              <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/44/Diamond_Sword_JE3_BE3.png">
+            </div>
+            <div class="tier ${t.includes("LT")?"lt":""}">${t}</div>
+          </div>`).join("")}
+      </div>
+
+      ${isAdmin ? `
+        <div class="rowBtns">
+          <button onclick="edit('${p.id}')">Edit</button>
+          <button onclick="delPlayer('${p.id}')">Delete</button>
+        </div>` : ``}
+    </div>`;
+  });
+
+  document.getElementById("list").innerHTML = html;
+}
+
+/* ===== SEARCH ===== */
+document.getElementById("search").onkeyup = function(){
+  let v = this.value.toLowerCase();
+  document.querySelectorAll(".card").forEach(c=>{
+    c.style.display = c.innerText.toLowerCase().includes(v) ? "block":"none";
+  });
+}
+
+/* ===== EDIT ===== */
+window.edit = function(id){
+  let p = players.find(x=>x.id===id);
+  document.getElementById("name").value = p.name;
+  document.getElementById("region").value = p.region;
+  document.getElementById("tiers").value = (p.tiers||[]).join(",");
+}
+
+/* ===== PROFILE ===== */
+window.openProfile = function(id){
+  let p = players.find(x=>x.id===id);
+  let score = calcScore(p.tiers||[]);
+  document.getElementById("popupContent").innerHTML = `
+    <h3>${p.name}</h3>
+    <p>${p.region} • ${getRank(score)}</p>
+    <p>${score} points</p>
+    <button onclick="closePop()">Close</button>
+  `;
+  document.getElementById("popup").style.display="flex";
+}
+window.closePop = function(){
+  document.getElementById("popup").style.display="none";
+}
+
+/* INIT */
+loadPlayers();
+
+</script>
 
 </body>
 </html>
